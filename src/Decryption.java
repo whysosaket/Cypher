@@ -21,7 +21,7 @@ public class Decryption extends JFrame implements Works{
     public void takeInput() {
         Scanner sc= new Scanner(System.in);
         System.out.print("Enter Key: ");
-        char key= sc.next().charAt(0);
+        int key= sc.nextInt();
         sc.nextLine();
         System.out.print("Enter Message: ");
         String input=sc.nextLine();
@@ -29,7 +29,7 @@ public class Decryption extends JFrame implements Works{
     }
 
     @Override
-    public void doTask(String input, char key) {
+    public String doTask(String input, int key) {
         String [] words= input.split("\\s");
         int k=key;
         StringBuilder encrypted= new StringBuilder();
@@ -41,6 +41,7 @@ public class Decryption extends JFrame implements Works{
             encrypted.append(String.valueOf(" "));
         }
         display(encrypted.toString());
+        return encrypted.toString();
     }
     @Override
     public void display(String crypt) {
@@ -76,7 +77,7 @@ public class Decryption extends JFrame implements Works{
         }
         Scanner sc= new Scanner(System.in);
         System.out.print("Enter Key: ");
-        char key= sc.next().charAt(0);
+        int key= sc.nextInt();
         sc.nextLine();
         doTask(crypt,key);
     }

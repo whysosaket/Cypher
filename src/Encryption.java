@@ -1,27 +1,37 @@
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Encryption implements Works{
+
     Encryption(){
         takeInput();
     }
     @Override
     public void takeInput() {
         Scanner sc= new Scanner(System.in);
-        System.out.print("Enter Key: ");
-        char key= sc.next().charAt(0);
-        sc.nextLine();
+        System.out.print("Enter Key(Enter \"RAND\" to Randomise): ");
+        String s=sc.nextLine().toLowerCase();
+        int key=0;
+        try {
+            key = Integer.parseInt(s);
+        }catch (NumberFormatException e){
+
+        }
+        Random r = new Random();
+        //sc.nextLine();
         System.out.print("Enter Message: ");
         String input=sc.nextLine();
-        doTask(input, key);
+        if(s.equals("rand")) {
+            doTask(input, r.nextInt(0,65535));
+        }
+        else if(key!=0) doTask(input, key);
     }
 
     @Override
-    public void doTask(String input, char key) {
+    public String doTask(String input, int key) {
         String [] words= input.split("\\s");
         int k=key;
         StringBuilder encrypted= new StringBuilder();
@@ -34,6 +44,7 @@ public class Encryption implements Works{
         }
         display(encrypted.toString());
         File(encrypted.toString());
+        return encrypted.toString();
     }
     @Override
     public void display(String crypt) {
